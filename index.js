@@ -1,7 +1,16 @@
-const cool = require('cool-ascii-faces');
+const mongoose = require('mongoose');
 const express = require('express');
+const cool = require('cool-ascii-faces');
+const bodyParser= require('body-parser');
+//require('dotenv').config()
+const Client = require('./models/client');
+const rootRoutes = require('./routes/root');
+const clientRoutes = require('./routes/clients');
+//const updateclientRoutes = require('./routes/updateclients');
+//const deleteClientRoutes = require('./routes/deleteclients')
+const cors = require('cors');
 const path = require('path');
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 let result = '';
 const times = process.env.TIMES || 5;
 const { Pool } = require('pg');
@@ -12,17 +21,67 @@ const pool = new Pool({
   }
 });
 
+const uri = "mongodb+srv://logan:drdeath@cluster0.mudoo.mongodb.net/tomatodb?retryWrites=true&w=majority"
+const opts = { useNewUrlParser: true };
+
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+mongoose.set('debug', true);
 
 
+(async function() {
+
+  try {
+
+    const conn = await mongoose.connect(uri, opts);
+
+    // Clean data for demo
+    await Promise.all(
+      Object.entries(conn.models).map(([k, m]) => m.deleteMany())
+    );
+  /*  
+    let x = await Client.find({ time: '30' });
+    if(x.length > 0){console.log("Collection length is greater than 0")}
+    else{console.log("Collection length is NOT greater than 0")}
+  */
+
+    //await Client.insertMany([{ name: 'half-tomato'}])
+
+    
+    // Insert some starter sample
+/*
+    await Client.insertMany([
+      { name: 'One', time: '2:00' },
+      { name: 'Two', time: '3:00' }
+    ]);
+*/
+   
 
 
+  } catch (e) {
+    console.error(e)
+  }
+
+
+})()
 
 express()
-  .use(express.static(path.join(__dirname, 'public')))
+
+.set('view engine', 'ejs')
+.use(bodyParser.json())
+.use(bodyParser.urlencoded({ extended: false }))
+.use('/', rootRoutes)
+.use('/clients', clientRoutes)
+//.use('/updateclients', updateclientRoutes)
+//.use('/deleteclients', deleteClientRoutes)
+.use(cors())
+.use(express.json())  
+.use(express.static(path.join(__dirname, 'public')))
   .set('views', path.join(__dirname, 'views'))
-  .set('view engine', 'ejs')
-  .get('/', (req, res) => res.render('pages/index'))
+  
+.get('/', (req, res) => res.render('pages/index'))
   .get('/timer', (req, res) => res.render('pages/timer'))
+  
   .get('/cool', (req, res) => res.send(cool()))
   .get('/times', (req, res) => res.send(showTimes()))
   .get('/db', async (req, res) => {
@@ -39,17 +98,24 @@ express()
   })
 
 
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
   
+  
+  
+ /* Note.find({}).then(result => {
+    result.forEach(note => {
+      console.log(note)
+    })
+    mongoose.connection.close()
+  })*/
+  
+
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
+
+
+
   showTimes = () => {
    for (i = 0; i < times; i++) {
       result += i + ' ';
     }
     return result;
   }
-
-
-
-  
-  
-  

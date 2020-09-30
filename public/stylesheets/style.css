@@ -13,7 +13,71 @@ body {
 
   text-align: center;
 }
+.a{fill:#4caf50}.b{fill:#ff3d00}
+  .tomato-fill {
+    animation-duration: 1s;
+  animation-delay: 0s;
+  
+  animation-direction: alternate-reverse;
+  animation-timing-function: ease;
+  animation-fill-mode: both;
+  animation-name: changeColor;
+  }
+ 
+ 
+@keyframes changeColor {
+	0% {
+		fill: red;
+	}
+	100% {
+		fill: white;
+	}
+}
 
+
+.red{fill:red;}
+.white{fill:#fff;}
+.line-draw {
+  fill:white;
+  stroke:black;
+  stroke-width: 10;  
+  stroke-dasharray: 9841.783203125;
+  stroke-dashoffset: 9841.783203125;
+  animation: dash 2s linear;
+  animation-duration: 2s;
+  animation-delay: 0s;
+  animation-timing-function: ease;
+  animation-fill-mode: both;}
+
+@keyframes dash {to {stroke-dashoffset: 0;}0%{fill: white;}100%{fill: black;}}
+.rect-two::after {
+  animation-duration: 2s;
+animation-delay: 1s;
+
+animation-direction: alternate-reverse;
+animation-timing-function: ease;
+animation-fill-mode: both;
+animation-name: changemyColor;
+
+
+}
+
+@keyframes changemyColor {
+0% {
+  fill: black;
+}
+100% {
+  fill: white;
+}
+}
+.clients {
+  display:none;
+  background-color: white;
+  border: solid black 2px;
+  width: 60vw;
+  padding: 50px;
+  margin-top: 10px;
+}
 .wrapper {
   /* background-image: url(./water.jpg);
   background-repeat: no-repeat;
@@ -31,8 +95,9 @@ body {
 #pomodoro-info {
   background-color: white;
   border: solid black 2px;
-  width: 60vw;
+  width: 40vw;
   margin-top: 10px;
+  margin-right:20px;
 }
 #pomodoro-container {
   display: flex;
@@ -46,6 +111,7 @@ body {
   margin-left: 20px;
 }
 #pomodoro-timer {
+  margin-top:40px;
   max-width: 80vw;
 }
 #pomodoro-clock {
@@ -93,17 +159,19 @@ body {
 }
 
 #pomodoro-clock-actions {
-  margin-top: 40px;
+  margin-top: 20px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   width: 120px;
+  font-family: 'Lato', sans-serif;
 }
 
 #pomodoro-clock-actions button {
   height: 40px;
   width: 40px;
   border-radius: 50%;
+  margin-left:23px;
 }
 
 .hidden {
@@ -122,15 +190,82 @@ body {
   border-radius: 3px;
   padding: 5px;
 }
+
 .half-tomato {
-  background-image: url("https://i.imgur.com/jewuAIC.png");
+  
+  /*background-image: url("half-tomato.svg");*/
   background-repeat: no-repeat;
-  padding: 30px;
+ 
+  background-size: 50px 50px;
+
+}
+.half-tomato-bg{background-image: url("half-tomato.svg");
+  background-repeat: no-repeat;
+ 
+  background-size: 50px 50px;
+
 }
 .full-tomato {
-  background-image: url("https://i.imgur.com/PafidgQ.png");
+ 
+ /* background-image: url("full-tomato.svg");*/
   background-repeat: no-repeat;
-  padding: 30px;
+  
+  background-size: 50px 50px;
+}
+.full-tomato-bg{
+  background-image: url("full-tomato.svg");
+  background-repeat: no-repeat;
+ 
+  background-size: 50px 50px;
+}
+.tomato-fill {
+  animation-duration: 1s;
+animation-delay: 0s;
+
+animation-direction: alternate-reverse;
+animation-timing-function: ease;
+animation-fill-mode: both;
+animation-name: changeColor;
+
+
+}
+
+
+@keyframes changeColor {
+0% {
+  fill: red;
+}
+100% {
+  fill: white;
+}
+}
+.red{fill:red;}
+.white{fill:#fff;}
+.path {
+   
+  stroke-dasharray: 9841.783203125;
+  stroke-dashoffset: 9841.783203125;
+  animation: dash 2s linear;
+  animation-duration: 2s;
+  animation-delay: 0s;
+  
+  
+  animation-timing-function: ease;
+  animation-fill-mode: both;
+  
+}
+
+@keyframes dash {
+ 
+  to {
+    stroke-dashoffset: 0;
+  }
+  0% {
+  fill: white;
+}
+100% {
+  fill: black;
+}
 }
 li {
   list-style: none;
@@ -215,3 +350,6 @@ li {
 .o-play-btn--playing .o-play-btn__mask:after {
   transform: rotate(0);
 }
+#pomodoro-info h3{font-family: 'Lato', sans-serif;}
+
+#pomodoro-sessions svg {max-width:70px }

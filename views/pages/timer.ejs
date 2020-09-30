@@ -27,9 +27,16 @@
                     <!-- <i class="fas fa-pause hidden" id="pause-icon"></i> -->
                     <div class="o-play-btn__mask"></div>
                   </button>
-                  <button id="pomodoro-stop" class="hidden">
-                    <i class="fas fa-stop"></i>
-                  </button>
+                  <form action="/clients" method="POST">
+                   
+                    <div>
+                      <button id="pomodoro-stop" type="submit" class="hidden">
+                        <i class="fas fa-stop"></i>
+                      </button>
+                    </div>
+                  </form>
+                      
+                 
               </div>
               <!-- new -->
               <div id="pomodoro-clock-title">
@@ -46,7 +53,7 @@
                 </div>
               </div>
               <div id="pomodoro-info">
-                <h3>My Pomodoro Sessions!!!! </h3>
+                <h3>These are My Pomodoro Sessions!!!! </h3>
                 <ul class = "tomatos" id="pomodoro-sessions">
     
                   <li></li>
@@ -54,6 +61,28 @@
                  
                 </ul>
               </div>
+
+            <div>
+
+              
+<div>
+
+  <ul class="clients">
+    <% for ( let client of clients ) { %>
+      <li class="client">
+        <span><%= client.name %>
+        <span><%= client.time %>
+      </li>
+    <% } %>
+  </ul>
+</div>
+
+
+    
+  </div>
+  </div>
+
+          
             
           </div>
           </div>
