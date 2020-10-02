@@ -58,8 +58,16 @@
     
                  
                 </ul>
+                <form action="/deleteAll" method="POST">
+                  
+                  <div id ="slide-in" class="box hide">
+                    <button class="dlt-button touch delete" id="myButton" type="submit"  value="clicked">
+                      
+                    </button>
+                  </div>
+                </form>
               </div>
-
+              
             <div>
 
               
@@ -106,6 +114,14 @@
 
 document.getElementById("pomodoro-stop").addEventListener("click", submitRumiForm);
 
+$('.o-play-btn').on('click', function(){
+    $('#slide-in').addClass('show');
+});
+
+
+
+
+//document.getElementById("myButton").addEventListener("click", submitRumiForm);
       </script>
   </body>
 </html>

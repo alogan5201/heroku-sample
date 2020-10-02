@@ -9,14 +9,17 @@ function myFunc(){
 
   
  let ul = document.querySelector("ul.tomatos");
-
+let deleteButton = document.querySelector("#slide-in");
   let fullTomato = document.createElement("li");
   fullTomato.setAttribute("class", "full-tomato");
   let listItems = document.querySelector(".clients").children;
   const records = Array.from(listItems);
   
   var i;
-  
+  if (records.length > 0){
+    
+    deleteButton.classList.add("show");
+    console.log("greater than 0");}
   for (let i = 1; records.length > i; i+= 2){
    
     
@@ -116,9 +119,26 @@ function myFunc(){
     ul.appendChild(b);}
   }
   myFunc();
+/*
+  console.log('Client-side code running');
 
+  const button = document.getElementById('myButton');
+  button.addEventListener('click', function(e) {
+    console.log('button was clicked');
   
-  
+    fetch('/routes/deleteAll', {method: 'DELETE'})
+      .then(function(response) {
+        if(response.ok) {
+          console.log('Click was recorded');
+          return;
+        }
+        throw new Error('Request failed.');
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  });
+  */
   
   
   
@@ -268,7 +288,7 @@ function myFunc(){
   const stopClock = () => {
     setUpdatedTimers();
     displaySessionLog(type);
-    updateProgress(type);
+    //updateProgress(type);
     clientCount();
     clearInterval(clockTimer);
     isClockStopped = true;
@@ -348,6 +368,7 @@ function myFunc(){
       
       console.log("full-tomato");
     }
+
     else{console.log("nope");}
    
 
@@ -373,19 +394,22 @@ function myFunc(){
     attributes: true,
   });
 
-  const updateProgress = function updateProgress() {
-   var elapsedTime = parseInt(timeSpentInCurrentSession / 60);
-    if (type === "Work" && elapsedTime > 0) {
-      july2020.increment();
-      console.log(july2020.score);
+   /*const updateProgress = function updateProgress() {
+    let tomatos = document.getElementById("pomodoro-sessions");
+    let lastElm = tomatos.lastElementChild;
+    let deleteButton = document.getElementById("#slide-in");
+    if(!lastElm){ 
+      console.log("no elements");
+      
+    }else {deleteButton.classList.toggle("show");
     }
-   /*  let halfTomatoURL = "url('" + 'http://www.sandboxmulti.com/wp-content/uploads/2020/09/half-tomato.svg?' + (new Date()).getTime() + "')";
+    let halfTomatoURL = "url('" + 'http://www.sandboxmulti.com/wp-content/uploads/2020/09/half-tomato.svg?' + (new Date()).getTime() + "')";
 let fullTomatoURL = "url('" + 'http://www.sandboxmulti.com/wp-content/uploads/2020/09/full-tomato-1.svg?' + (new Date()).getTime() + "')";
     let halfTomato = document.querySelector("half-tomato");
     halfTomato.style.backgroundImage = halfTomatoURL; 
     let fullTomato = document.querySelector("full-tomato");
     fullTomato.style.backgroundImage = fullTomatoURL; */
-  };
+  
 
   const displayCurrentTimeLeftInSession = () => {
     const secondsLeft = currentTimeLeftInSession;

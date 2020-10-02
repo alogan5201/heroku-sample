@@ -5,9 +5,10 @@ const bodyParser= require('body-parser');
 //require('dotenv').config()
 const Client = require('./models/client');
 const rootRoutes = require('./routes/root');
+//const deleteRoutes = require('./routes/deleteAll');
 const clientRoutes = require('./routes/clients');
 //const updateclientRoutes = require('./routes/updateclients');
-//const deleteClientRoutes = require('./routes/deleteclients')
+const deleteClientRoutes = require('./routes/deleteAll')
 const cors = require('cors');
 const path = require('path');
 const PORT = process.env.PORT || 3000;
@@ -21,14 +22,45 @@ const pool = new Pool({
   }
 });
 
+
 const uri = "mongodb+srv://logan:drdeath@cluster0.mudoo.mongodb.net/tomatodb?retryWrites=true&w=majority"
 const opts = { useNewUrlParser: true };
 
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('debug', true);
+/*const deleteButton = document.querySelector(".delete-btn");
+event.addEventListener(deleteTomatos);
+deleteButton.addEventListener('click', function(e){
+  e.preventDefault();
+  console.log('Congrats! You have reached the clickController!');
+});
+
+function deleteTomatos(e){
+  if (e.target.className != "delete-btn") {
+    return;
+  } (async function() {
+
+    try {
+  
+      const conn = await mongoose.connect(uri, opts);
+  
+      // Clean data for demo
+      await Promise.all(
+        Object.entries(conn.models).map(([k, m]) => m.deleteMany())
+      );
+
+  } catch (e) {
+    console.error(e)
+  }
 
 
+})();
+
+
+
+
+}*/
 (async function() {
 
   try {
@@ -72,8 +104,9 @@ express()
 .use(bodyParser.urlencoded({ extended: false }))
 .use('/', rootRoutes)
 .use('/clients', clientRoutes)
+//.use('/deleteAll', deleteRoutes)
 //.use('/updateclients', updateclientRoutes)
-//.use('/deleteclients', deleteClientRoutes)
+.use('/deleteAll', deleteClientRoutes)
 .use(cors())
 .use(express.json())  
 .use(express.static(path.join(__dirname, 'public')))
